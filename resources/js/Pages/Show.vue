@@ -195,8 +195,6 @@
     import Modal from '../Jetstream/Modal.vue';
     import _ from 'lodash';
     import Button from '../Jetstream/Button.vue'
-    import VueToast from 'vue-toast-notification';
-    import 'vue-toast-notification/dist/theme-sugar.css';
 
 
     export default defineComponent({
@@ -212,7 +210,6 @@
             Link,
             Modal,
             Button,
-            VueToast
         },
         props: {
             status: String,
@@ -260,13 +257,8 @@
                     .post(this.route('apply'), {
                         onFinish: function(response){
                             console.log(response)
-                            this.$toast.success({
-                                message: "You have successfully applied to this job",
-                                type: "success",
-                                duration: 5000,
-                                dismissible: true
-                            })
-                            this.form.reset()
+                            // this.form.reset()
+                            this.showingModal = false
                         }
                     })
             },

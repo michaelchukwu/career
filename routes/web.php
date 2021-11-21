@@ -197,7 +197,7 @@ Route::get('/', function (HttpRequest $request) {
 })->name('home');
 Route::get('/position/{jobi}', function ($jobi) {
     $job = Job::find($jobi);
-    $job->type = DB::table('job_type')->where('id', $job->job_type_id)->first();
+    $job->type = DB::table('job_types')->where('id', $job->job_type_id)->first();
     return Inertia::render('Show', [
         'job' => $job
     ]);
