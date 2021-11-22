@@ -26,7 +26,8 @@ class JobController extends Controller
             'job_types.id as job_types_id',
             'jobs.title as jobs_title',
             'job_types.title as job_types_title',
-            'jobs.created_at')
+            'jobs.created_at',
+            'jobs.is_live')
         ->paginate(20);
         return Inertia::render('Job/Index',['jobs'=>$jobs]);
 
@@ -204,5 +205,17 @@ class JobController extends Controller
     {
        $job->delete();
         return back()->with('success','User deleted successfully');
+    }
+    public function publish($id){
+        $job = Job::find($id);
+        $job->is_live = true;
+        $job->save();
+        return back()->with('success', 'Published');
+    }
+    public function unPublish($id){
+        $job = Job::find($id);
+        $job->is_live = false;
+        $job->save();
+        return back()->with('success', 'Unpublished');
     }
 }

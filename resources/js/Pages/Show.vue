@@ -134,10 +134,10 @@
                                         <div class="text-base text-gray-500 font-thin">Location</div>
                                         <div class="text-xl text-black ">{{job.location}}</div>
                                     </div>
-                                    <div class="py-4 border-b border-gray-200">
+                                    <!-- <div class="py-4 border-b border-gray-200">
                                         <div class="text-base text-gray-500 font-thin">Salary</div>
                                         <div @show="job.salary" class="text-xl text-black ">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
-                                    </div>
+                                    </div> -->
                                     <div class="py-4 border-b border-gray-200">
                                         <div class="text-base text-gray-500 font-thin">Type</div>
                                         <div class="text-xl text-black ">{{job.type.title}}</div>

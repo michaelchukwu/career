@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobTypeController;
@@ -260,5 +261,8 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('users', UserController::class);
     // Route::resource('products', ProductController::class);
     Route::resource('jobs', JobController::class);
+    Route::resource('applications', ApplicationController::class);
+    Route::get('jobs/publish/{job}', [JobController::class, 'publish']);
+    Route::get('jobs/unpublish/{job}', [JobController::class, 'unPublish']);
     Route::resource('job-types', JobTypeController::class);
 });

@@ -2,7 +2,7 @@
     <app-layout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                Create Job Post
+                Edit {{job.title}}
             </h2>
         </template>
 
@@ -25,7 +25,7 @@
                                             <div class="mb-4">
                                                 <jet-label for="type" value="Employment Type" :required="true"/>
                                                 <select v-model="form.type" id="type" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" required>
-                                                    <option></option>
+                                                     <option selected="selected" :value="job_type.id">{{job_type.title}}</option>
                                                     <option v-for="type in allJobTypes" :key="type.id" :value="type.id">{{type.title}}</option>
                                                 </select>
                                             </div>
@@ -51,12 +51,13 @@
                                             </div>
                                             <div class="mb-4 grid grid-cols-2 gap-2">
                                                 <div>
-                                                    <jet-label for="salary" value="Salary" :required="false"/>
+                                                    <jet-label for="salary" value="Salary" :required="true"/>
                                                     <jet-input id="salary" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.salary" autofocus />
                                                 </div>
                                                 <div>
-                                                    <jet-label for="duration" value="Duration" :required="false"/>
-                                                    <select v-model="form.salary_duration" id="duration" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                                    <jet-label for="duration" value="Duration" :required="true"/>
+                                                    <select v-model="form.salary_duration" id="duration" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" required>
+                                                        <option selected="selected" :value="job.salary_duration">{{job.salary_duration}}</option>
                                                         <option value="Year">Year</option>
                                                         <option value="Month">Month</option>
                                                         <option value="Day">Day</option>
@@ -66,8 +67,8 @@
                                                 </div>
                                             </div>
                                             <div class="mb-4">
-                                                <jet-label for="location" value="Location" :required="false"/>
-                                                <jet-input id="location" type="text" class="mt-1 block w-full" v-model="form.location" autofocus />
+                                                <jet-label for="location" value="Location" :required="true"/>
+                                                <jet-input id="location" type="text" class="mt-1 block w-full" v-model="form.location" required autofocus />
                                             </div>
                                             <div class="mb-4">
                                                 <jet-label for="slug" value="Slug" />
@@ -157,11 +158,8 @@
                                             </div> -->
                                         </div>
                                         <div class="flex items-center justify-end mt-4">
-                                            <jet-button class="ml-4 bg-green-400" @click="publish()" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                                Publish
-                                            </jet-button>
-                                            <jet-button class="ml-4 bg-blue-400" @click="draft()" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                                Save Draft
+                                            <jet-button class="ml-4 bg-green-400" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                                Update
                                             </jet-button>
                                         </div>
                                     </form>
@@ -212,6 +210,8 @@
 
         },
         props:{
+            job:Object,
+            job_type:Object,
             job_types:Object,
             errors:Object
         },
@@ -221,20 +221,20 @@
                 showingModal:false,
                 select_all:false,
                 form: this.$inertia.form({
-                    title:null,
-                    type:null,
-                    description:null,
-                    location:null,
-                    slug:null,
-                    is_live:false,
-                    salary:null,
-                    salary_duration:null,
-                    can_expire:false,
-                    goes_live:null,
-                    expires:null,
-                    has_phone:false,
-                    has_first_name:false,
-                    has_last_name:false,
+                    title:this.job.title,
+                    type:this.job_type,
+                    description:this.job.description,
+                    location:this.job.location,
+                    slug:this.job.slug,
+                    is_live:this.job.is_live,
+                    salary:this.job.salary,
+                    salary_duration:this.job.salary_duration,
+                    can_expire:this.job.can_expire,
+                    goes_live:this.job.goes_live,
+                    expires:this.job.expires,
+                    has_phone:this.job.has_phone,
+                    has_first_name:this.job.has_first_name,
+                    has_last_name:this.job.has_last_name,
                     has_linkedin:false,
                     has_twitter:false,
                     has_facebook:false,
@@ -270,16 +270,9 @@
                     .transform(data => ({
                         ... data
                     }))
-                    .post(this.route('jobs.store'), {
+                    .put(this.route('jobs.update', this.job.id), {
                         onFinish: function(response){
                             console.log(response)
-                            this.$toast.success({
-                                message: "You have successfully applied to this job",
-                                type: "success",
-                                duration: 5000,
-                                dismissible: true
-                            })
-                            this.form.reset()
                         }
                     })
             },
