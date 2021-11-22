@@ -8,9 +8,10 @@
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- <div class="flex justify-end px-4">
-                    <Link :href="route('applications.create')" class="text-white bg-green-400 rounded px-3 py-2 mb-4">Create</Link>
-                </div> -->
+                <div class="flex justify-end px-4">
+                    <!-- <Link :href="route('export')" class="text-white bg-green-400 rounded px-3 py-2 mb-4">Export to Excel</Link> -->
+                    <a href="/export" class="text-white bg-green-400 rounded px-3 py-2 mb-4">Export to Excel</a>
+                </div>
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                     <div class="flex flex-col">
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -79,6 +80,7 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <pagination class="mt-6" :links="allApplications.links" />
                             </div>
                         </div>
                         </div>
@@ -91,6 +93,7 @@
 </template>
 
 <script>
+    import Pagination from '@/Bits/Pagination'
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3'
@@ -98,7 +101,8 @@
     export default defineComponent({
         components: {
             AppLayout,
-            Link
+            Link,
+            Pagination
         },
         props:{
             applications:Object

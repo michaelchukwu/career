@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ApplicationsExport;
 use App\Models\Application;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+
 class ApplicationController extends Controller
 {
     /**
@@ -38,12 +41,12 @@ class ApplicationController extends Controller
         "applicants.state",
         "applicants.city",
         "applicants.street",
-        "jobs.id",
+        "applications.id",
         "jobs.title as job_title",
         "job_types.title as job_type",
         "jobs.location",
         )
-        ->paginate(20);
+        ->paginate(10);
         // dd($applications);
         return Inertia::render('Applications/Index',['applications'=>$applications]);
     }
@@ -112,5 +115,11 @@ class ApplicationController extends Controller
     public function destroy(Application $application)
     {
         //
+    }
+    public function export()
+    {
+        return Excel::download(new ApplicationsExport, 'applications-'.now().'.xlsx');
+        // return back();
+
     }
 }

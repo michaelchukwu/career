@@ -75,6 +75,8 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <pagination class="mt-6" :links="allJobs.links" />
+
                             </div>
                         </div>
                         </div>
@@ -90,11 +92,13 @@
     import { defineComponent } from 'vue'
     import AppLayout from '@/Layouts/AppLayout.vue'
     import { Head, Link } from '@inertiajs/inertia-vue3'
+    import Pagination from '@/Bits/Pagination'
 
     export default defineComponent({
         components: {
             AppLayout,
-            Link
+            Link,
+            Pagination
         },
         props:{
             jobs:Object

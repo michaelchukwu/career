@@ -262,6 +262,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('products', ProductController::class);
     Route::resource('jobs', JobController::class);
     Route::resource('applications', ApplicationController::class);
+    Route::get('export', [ApplicationController::class, 'export'])->name('export');
     Route::get('jobs/publish/{job}', [JobController::class, 'publish']);
     Route::get('jobs/unpublish/{job}', [JobController::class, 'unPublish']);
     Route::resource('job-types', JobTypeController::class);
