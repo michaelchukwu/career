@@ -51,13 +51,13 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title'=>'required',
-            'type'=>'required',
-            'description'=>'required',
-            'location'=>'required',
-            'slug'=>'required'
-        ]);
+        // $this->validate($request, [
+        //     'title'=>'required',
+        //     'type'=>'required',
+        //     'description'=>'required',
+        //     'location'=>'required',
+        //     'slug'=>'required'
+        // ]);
 
         $input = $request->all();
 
@@ -115,7 +115,8 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
-        //
+        $job_type = JobType::find($job->job_type_id);
+        return Inertia::render('Job/View',['job'=>$job, 'job_type'=>$job_type]);
     }
 
     /**
@@ -126,7 +127,11 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        //
+
+        $job_types = JobType::all();
+        $job_type = JobType::find($job->job_type_id);
+
+        return Inertia::render('Job/Edit',['job'=>$job,'job_types'=>$job_types,'job_type'=>$job_type]);
     }
 
     /**
@@ -138,7 +143,16 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        //
+        // $this->validate($request, [
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:users,email,'.$id,
+        //     'password' => 'same:confirm-password',
+        //     'roles' => 'required'
+        // ]);
+        $input = $request->all();
+        $job->update($input);
+        return redirect()->route('jobs.index')
+                        ->with('success','Job updated successfully');
     }
 
     /**
@@ -149,6 +163,7 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        //
+       $job->delete();
+        return back()->with('success','User deleted successfully');
     }
 }
