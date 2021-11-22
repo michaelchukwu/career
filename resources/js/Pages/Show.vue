@@ -130,7 +130,7 @@
                             <div class="ml-7 my-7 text-sm grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-500 font-light py-4">
                                 <div class="col-span-2">
                                     <h2 class="mb-2 text-3xl font-semibold">Description</h2>
-                                    {{job.description}}
+                                    <div v-html="job.description"></div>
                                 </div>
                                 <div class="bg-car text-gray-600 md:px-4">
                                     <h2 class="mb-2 font-semibold text-car text-2xl">Details</h2>
@@ -255,9 +255,12 @@
                         ... data
                     }))
                     .post(this.route('apply'), {
-                        onFinish: function(response){
+                        onFinish: (response)=>{
                             console.log(response)
-                            // this.form.reset()
+
+                        },
+                        onSuccess: (response) => {
+                            this.form.reset()
                             this.showingModal = false
                         }
                     })

@@ -112,8 +112,8 @@
                                     <span class="text-gray-400 text-sm font-light">{{job.location}}</span>
                                 </div>
                             </div>
-                            <div class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description"></div>
-                            <div class="flex justify-between border-t border-gray-200 pt-4">
+                            <div class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,150)"></div>
+                            <div class="flex justify-between border-t border-gray-200 pt-4 max-h-12 overflow-hidden">
                                 <div class="ml-3 text-base font-semibold text-gray-500">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
                                 <Link :href="'/position/'+job.id" class="ml-3 text-base flex items-center text-lnk font-semibold hover:text-gray-500">
                                 View More
