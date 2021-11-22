@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\JobController;
+use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\WalletController;
 use App\Models\Job;
 use App\Models\Account;
@@ -253,8 +254,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('products', ProductController::class);
+    // Route::resource('roles', RoleController::class);
+    // Route::resource('users', UserController::class);
+    // Route::resource('products', ProductController::class);
     Route::resource('jobs', JobController::class);
+    Route::resource('job-types', JobTypeController::class);
 });

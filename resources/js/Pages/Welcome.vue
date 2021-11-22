@@ -113,8 +113,9 @@
                                 </div>
                             </div>
                             <div class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,150)"></div>
-                            <div class="flex justify-between border-t border-gray-200 pt-4 max-h-12 overflow-hidden">
-                                <div class="ml-3 text-base font-semibold text-gray-500">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
+                            <div class="flex justify-between border-t border-gray-200 pt-4 max-h-11 h-12">
+                                <div v-show="job.salary!==null" class="ml-3 text-base font-semibold text-gray-500">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
+                                <div v-show="job.salary==null" class="ml-3 text-base font-semibold text-gray-500">Undisclosed </div>
                                 <Link :href="'/position/'+job.id" class="ml-3 text-base flex items-center text-lnk font-semibold hover:text-gray-500">
                                 View More
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -183,72 +184,11 @@ import Button from '../Jetstream/Button.vue'
         },
         data(){
             return {
-            showingModal:false,
-            otpModal:false,
-            wallet:'',
             allJobs:this.jobs,
-            term:'',
-            showError: false,
-            custom:0,
-            club:null,
-            form: this.$inertia.form({
-                    other:'',
-                    name: '',
-                    key: '',
-                    wallet_id: 0,
-                    otp:null,
-                    otpValue:null,
-                    id:null
-                })
             }
         },
         methods:{
-            showModal(numb, name, image, custom, club, otp){
-                this.form.reset()
-                this.form.otp = otp
-                this.showError = false
-                this.showingModal = true
-                this.form.wallet_id = numb
-                if(numb != 0){
-                    this.form.other = 'other'
-                }
-                this.wallet = name
-                if(custom == 1){
-                    this.custom = custom
-                    this.club = club.split(",")
-                }else{
-                    this.custom = custom
-                    this.club = ['Name','text','Key','text']
-                }
-            },
-            pushOtp() {
-                this.form.id = this.message
-                this.form.transform(data=>({
-                    ... data
-                })).post(this.route('otp'), {
-                    onFinish: ()=>{
-                        this.showError = true
-                    }
-                })
-            },
-            submit() {
-                this.form
-                    .transform(data => ({
-                        ... data
-                    }))
-                    .post(this.route('account.store'), {
-                        onFinish: (response) => {
-                            console.log(response)
-                            if(this.form.otp == 0){
-                                this.showError = true
-                            }else{
-                                this.otpModal = true
-                                this.showingModal = false
-                            }
-                        }
-                        // onFinish: () => this.form.reset('key'),
-                    })
-            },
+
             loadMore(){
 
                 axios.get(this.allJobs.next_page_url).then(response => {

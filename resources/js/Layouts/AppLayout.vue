@@ -24,6 +24,9 @@
                                 <jet-nav-link :href="route('jobs.index')" :active="route().current('jobs.*')">
                                     Jobs
                                 </jet-nav-link>
+                                <jet-nav-link :href="route('job-types.index')" :active="route().current('job-types.*')">
+                                    Job Types
+                                </jet-nav-link>
                                 <!-- <jet-nav-link :href="route('wallet.added')" :active="route().current('wallet.added')">
                                     Added Wallets
                                 </jet-nav-link>

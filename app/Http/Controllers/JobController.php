@@ -27,7 +27,7 @@ class JobController extends Controller
             'jobs.title as jobs_title',
             'job_types.title as job_types_title',
             'jobs.created_at')
-        ->paginate(5);
+        ->paginate(20);
         return Inertia::render('Job/Index',['jobs'=>$jobs]);
 
     }
