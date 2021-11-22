@@ -67,7 +67,7 @@ class JobController extends Controller
             'job_type_id'=>$request->type,
             'description'=>$request->description,
             'location'=>$request->location,
-            'slug'=>$request->slug,
+            'slug'=>$request->title.now(),
             'is_live'=>$request->is_live,
             'salary'=>$request->salary,
             'salary_duration'=>$request->salary_duration,
@@ -150,7 +150,46 @@ class JobController extends Controller
         //     'roles' => 'required'
         // ]);
         $input = $request->all();
-        $job->update($input);
+        // $job->update($input);
+        $job->title=$request->title;
+        $job->job_type_id=$request->type;
+        $job->description=$request->description;
+        $job->location=$request->location;
+        $job->slug=$request->slug;
+        $job->is_live=$request->is_live;
+        $job->salary=$request->salary;
+        $job->salary_duration=$request->salary_duration;
+        $job->can_expire=$request->can_expire;
+        $job->goes_live=$request->goes_live;
+        $job->expires=$request->expires;
+        $job->has_phone=$request->has_phone;
+        $job->has_first_name=$request->has_first_name;
+        $job->has_last_name=$request->has_last_name;
+        $job->has_linkedin=$request->has_linkedin;
+        $job->has_twitter=$request->has_twitter;
+        $job->has_facebook=$request->has_facebook;
+        $job->has_website=$request->has_website;
+        $job->has_cv=$request->has_cv;
+        $job->has_cover_letter=$request->has_cover_letter;
+        $job->has_image=$request->has_image;
+        $job->has_state=$request->has_state;
+        $job->has_city=$request->has_city;
+        $job->has_street=$request->has_street;
+        $job->phone_r=$request->phone_r;
+        $job->first_name_r=$request->first_name_r;
+        $job->last_name_r=$request->last_name_r;
+        $job->linkedin_r=$request->linkedin_r;
+        $job->twitter_r=$request->twitter_r;
+        $job->facebook_r=$request->facebook_r;
+        $job->website_r=$request->website_r;
+        $job->cv_r=$request->cv_r;
+        $job->cover_letter_r=$request->cover_letter_r;
+        $job->image_r=$request->image_r;
+        $job->state_r=$request->state_r;
+        $job->city_r=$request->city_r;
+        $job->street_r=$request->street_r;
+        $job->updated_at=now();
+        $job->save();
         return redirect()->route('jobs.index')
                         ->with('success','Job updated successfully');
     }

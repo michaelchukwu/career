@@ -25,7 +25,7 @@
                                             <div class="mb-4">
                                                 <jet-label for="type" value="Employment Type" :required="true"/>
                                                 <select v-model="form.type" id="type" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" required>
-                                                    <option></option>
+                                                     <option selected="selected" :value="job_type.id">{{job_type.title}}</option>
                                                     <option v-for="type in allJobTypes" :key="type.id" :value="type.id">{{type.title}}</option>
                                                 </select>
                                             </div>
@@ -159,7 +159,7 @@
                                         </div>
                                         <div class="flex items-center justify-end mt-4">
                                             <jet-button class="ml-4 bg-green-400" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                                                Publish
+                                                Update
                                             </jet-button>
                                         </div>
                                     </form>
