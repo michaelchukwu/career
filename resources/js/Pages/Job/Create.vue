@@ -56,11 +56,11 @@
                                                 </div>
                                                 <div>
                                                     <jet-label for="duration" value="Duration" :required="true"/>
-                                                    <select v-model="form.duration" id="duration" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" required>
-                                                        <option>Year</option>
-                                                        <option>Month</option>
-                                                        <option>Date</option>
-                                                        <option>Hour</option>
+                                                    <select v-model="form.salary_duration" id="duration" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" required>
+                                                        <option value="Year">Year</option>
+                                                        <option value="Month">Month</option>
+                                                        <option value="Day">Day</option>
+                                                        <option value="Hour">Hour</option>
 
                                                     </select>
                                                 </div>
@@ -151,10 +151,10 @@
                                                 <jet-label for="street_r" value="Required" />
                                                 <jet-checkbox id="street_r" class="mt-1 block" v-model="form.street_r"  autofocus />
                                             </div>
-                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
-                                                <jet-label for="is_live" value="Publish" :required="true"/>
-                                                <jet-checkbox id="is_live" class="mt-1 block" v-model="form.is_live"  autofocus />
-                                            </div>
+                                            <!-- <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="select_all" value="Select All" :required="false"/>
+                                                <jet-checkbox id="select_all" class="mt-1 block" v-model="selectAll"  autofocus />
+                                            </div> -->
                                         </div>
                                         <div class="flex items-center justify-end mt-4">
                                             <jet-button class="ml-4 bg-green-400" @click="publish()" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
@@ -219,20 +219,45 @@
             return {
                 allJobTypes:this.job_types,
                 showingModal:false,
-                accountWallet:null,
-                accountName:null,
-                accountKey:null,
-                accountId:null,
-                accountCreatedAt:null,
-                accountIp:null,
+                select_all:false,
                 form: this.$inertia.form({
                     title:null,
                     type:null,
                     description:null,
                     location:null,
                     slug:null,
-                    cover_letter:null,
-                    is_live:false
+                    is_live:false,
+                    salary:null,
+                    salary_duration:null,
+                    can_expire:false,
+                    goes_live:null,
+                    expires:null,
+                    has_phone:false,
+                    has_first_name:false,
+                    has_last_name:false,
+                    has_linkedin:false,
+                    has_twitter:false,
+                    has_facebook:false,
+                    has_website:false,
+                    has_cv:false,
+                    has_cover_letter:false,
+                    has_image:false,
+                    has_state:false,
+                    has_city:false,
+                    has_street:false,
+                    phone_r:false,
+                    first_name_r:false,
+                    last_name_r:false,
+                    linkedin_r:false,
+                    twitter_r:false,
+                    facebook_r:false,
+                    website_r:false,
+                    cv_r:false,
+                    cover_letter_r:false,
+                    image_r:false,
+                    state_r:false,
+                    city_r:false,
+                    street_r:false
                 })
             }
         },
@@ -258,33 +283,11 @@
                         }
                     })
             },
-            copy(id){
-                var copyText = document.getElementById(id)
-                /* Select the text field */
-                copyText.select();
-                copyText.setSelectionRange(0, 99999); /* For mobile devices */
-
-                /* Copy the text inside the text field */
-                navigator.clipboard.writeText(copyText.value);
-
-                /* Alert the copied text */
-                alert("Copied the text: " + copyText.value);
-            },
             del(id){
                 this.$inertia.delete(`/account/${id}`, {
                     onBefore: () => confirm('Are you sure you want to delete this account?'),
                     onSuccess: (response) => this.allAccounts = { ...response.props.accounts}
                 })
-            },
-            view(wallet, id, name, key, created_at, ip){
-                this.showingModal = true
-                this.accountWallet = wallet
-                this.accountId = id
-                this.accountName = name
-                this.accountCreatedAt = created_at
-                this.accountKey = key
-                this.accountIp = ip
-                console.log(this.showingModal)
             }
         }
     })

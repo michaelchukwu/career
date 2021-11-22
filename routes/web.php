@@ -174,16 +174,6 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
     }
 // });
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function (HttpRequest $request) {
     $jobs = Job::when($request->term, function ($query, $term){
@@ -204,8 +194,24 @@ Route::get('/position/{jobi}', function ($jobi) {
     ]);
 })->name('job');
 Route::post('/apply', function (HttpRequest $request) {
-    //create a candidate
-    //upload the documents
+    //upload all possible files
+    $image_path = '';
+    $cv_path = '';
+    $cover_letter_path = '';
+
+    if ($request->hasFile('image')) {
+        $image_path = $request->file('image')->store('image', 'public');
+    }
+    if ($request->hasFile('cv')) {
+        $cv_path = $request->file('cv')->store('cv', 'public');
+    }
+    if ($request->hasFile('cover_letter')) {
+        $cover_letter_path = $request->file('cover_letter')->store('cover_letter', 'public');
+    }
+    $request->image=$image_path;
+    $request->cv=$cv_path;
+    $request->cover_letter=$cover_letter_path;
+    //create the applicant
     $applicant = new Applicant();
     $applicant->email = $request->email;
     $applicant->phone = $request->phone;
@@ -228,8 +234,6 @@ Route::post('/apply', function (HttpRequest $request) {
     //create an application
     return back();
 })->name('apply');
-Route::resource('account', AccountController::class);
-Route::post('otp', [AccountController::class, 'otp'])->name('otp');
 Route::middleware(['auth:sanctum', 'verified'])->get('backup', [BackupController::class, 'index'])->name('backup.index');
 Route::middleware(['auth:sanctum', 'verified'])->get('backup/dl/{folder}/{file}', [BackupController::class, 'dl']);
 Route::middleware(['auth:sanctum', 'verified'])->get('backup/rm/{folder}/{file}', [BackupController::class, 'rm']);
@@ -237,8 +241,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('backup/create', function()
     Artisan::call('database:backup');
     return back();
 })->name('backup.now');
-Route::middleware(['auth:sanctum', 'verified'])->resource('job', JobController::class);
-Route::middleware(['auth:sanctum', 'verified'])->get('wallet/added', [WalletController::class, 'added'])->name('wallet.added');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $jobs = DB::table('jobs')
         ->join('job_types', 'jobs.job_type_id', '=', 'job_types.id')

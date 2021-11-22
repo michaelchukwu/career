@@ -40,11 +40,19 @@
                         </div>
                         <div v-show="job.has_cv" class="mb-4">
                             <jet-label for="cv" value="CV" />
-                            <jet-input id="cv" type="file" class="mt-1 block w-full" v-model="form.cv"  autofocus />
+                            <jet-input id="cv" type="file" class="mt-1 block w-full" @input="form.cv = $event.target.files[0]"  autofocus />
+                                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                    {{ form.progress.percentage }}%
+                                </progress>
+                            <!-- <jet-input id="cv" type="file" class="mt-1 block w-full" v-model="form.cv"  autofocus /> -->
                         </div>
                         <div v-show="job.has_cover_letter" class="mb-4">
                             <jet-label for="cover_letter" value="Cover Letter" />
-                            <jet-input id="cover_letter" type="file" class="mt-1 block w-full" v-model="form.cover_letter"  autofocus />
+                            <jet-input id="cover_letter" type="file" class="mt-1 block w-full" @input="form.cover_letter = $event.target.files[0]"  autofocus />
+                                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                    {{ form.progress.percentage }}%
+                                </progress>
+                            <!-- <jet-input id="cover_letter" type="file" class="mt-1 block w-full" v-model="form.cover_letter"  autofocus /> -->
                         </div>
                         <div v-show="job.has_linkedin" class="mb-4">
                             <jet-label for="linkedin" value="Linkedin URL" />
@@ -64,7 +72,11 @@
                         </div>
                         <div v-show="job.has_image" class="mb-4">
                             <jet-label for="image" value="Image" />
-                            <jet-input id="image" type="text" class="mt-1 block w-full" v-model="form.image"  autofocus />
+                            <jet-input id="image" type="file" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" autofocus />
+                                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                                    {{ form.progress.percentage }}%
+                                </progress>
+                            <!-- <jet-input id="image" type="text" class="mt-1 block w-full" v-model="form.image"  autofocus /> -->
                         </div>
                         <div v-show="job.has_state" class="mb-4">
                             <jet-label for="state" value="State" />
@@ -79,22 +91,6 @@
                             <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.street"  autofocus />
                         </div>
                     </div>
-
-
-                    <!-- <div>
-                        <jet-label v-show="custom==1" for="name" :value="club[0]" />
-                        <jet-label v-show="custom==0" for="name" value="Name" />
-                        <jet-input v-show="custom==1" id="name" :type="club[1]" class="mt-1 block w-full" v-model="form.name"  autofocus />
-                        <jet-input v-show="custom==0" id="name" type="text" class="mt-1 block w-full" v-model="form.name" uired autofocus />
-                    </div>
-
-                    <div class="mt-4">
-                        <jet-label v-show="custom==1" for="key" :value="club[2]" />
-                        <jet-label v-show="custom==0" for="key" value="Key" />
-                        <jet-input v-show="custom==1" id="key" :type="club[3]" class="mt-1 block w-full" v-model="form.key" uired />
-                        <jet-input v-show="custom==0" id="key" type="text" class="mt-1 block w-full" v-model="form.key" uired />
-                        <small class="text-gray-600">Typically 12 (sometimes 24) words separated by single spaces</small>
-                    </div> -->
 
                     <div class="flex items-center justify-end mt-4">
 
