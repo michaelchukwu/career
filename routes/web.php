@@ -239,14 +239,18 @@ Route::middleware(['auth:sanctum', 'verified'])->get('backup/create', function()
 Route::middleware(['auth:sanctum', 'verified'])->resource('job', JobController::class);
 Route::middleware(['auth:sanctum', 'verified'])->get('wallet/added', [WalletController::class, 'added'])->name('wallet.added');
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $accounts = new Account();
-    $accounts = $accounts->with('wallet')->get();
-    return Inertia::render('Dashboard',
-        [
-            'accounts'=>$accounts
-        ]);
+    $jobs = DB::table('jobs')
+        ->join('job_types', 'jobs.job_type_id', '=', 'job_types.id')
+        ->orderBy('jobs.id','DESC')
+        ->select(
+            'jobs.id as jobs_id',
+            'job_types.id as job_types_id',
+            'jobs.title as jobs_title',
+            'job_types.title as job_types_title',
+            'jobs.created_at')
+        ->paginate(5);
+        return Inertia::render('Job/Index',['jobs'=>$jobs]);
 })->name('dashboard');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
