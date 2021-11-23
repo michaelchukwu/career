@@ -201,13 +201,17 @@ Route::post('/apply', function (HttpRequest $request) {
     $cover_letter_path = '';
 
     if ($request->hasFile('image')) {
-        $image_path = $request->file('image')->store('image', 'public');
+        $guessExtension = $request->file('image')->guessExtension();
+        $image_path = $request->file('image')->storeAs('image', $request->first_name.'_'.now().'_'.'image'.$guessExtension, 'public');
     }
     if ($request->hasFile('cv')) {
-        $cv_path = $request->file('cv')->store('cv', 'public');
+        $guessExtension = $request->file('cv')->guessExtension();
+        $cv_path = $request->file('cv')->storeAs('cv', $request->first_name.'_'.now().'_'.'cv'.$guessExtension, 'public');
     }
     if ($request->hasFile('cover_letter')) {
-        $cover_letter_path = $request->file('cover_letter')->store('cover_letter', 'public');
+        $guessExtension = $request->file('cover_letter')->guessExtension();
+        $cover_letter_path = $request->file('cover_letter')->storeAs('cover_letter', $request->first_name.'_'.now().'_'.'cover_letter'.$guessExtension, 'public');
+        // $cover_letter_path = $request->file('cover_letter')->store('cover_letter', 'public');
     }
     $request->image=$image_path;
     $request->cv=$cv_path;
@@ -228,6 +232,18 @@ Route::post('/apply', function (HttpRequest $request) {
     $applicant->state = $request->state;
     $applicant->city = $request->city;
     $applicant->street = $request->street;
+    $applicant->age = $request->age;
+    $applicant->dob = $request->dob;
+    $applicant->gender = $request->gender;
+    $applicant->exp_post = $request->exp_post;
+    $applicant->experience = $request->experience;
+    $applicant->first_degree = $request->first_degree;
+    $applicant->first_course = $request->first_course;
+    $applicant->second_degree = $request->second_degree;
+    $applicant->second_course = $request->second_course;
+    $applicant->third_degree = $request->third_degree;
+    $applicant->third_course = $request->third_course;
+    $applicant->professional = $request->professional;
     $applicant->created_at = now();
     $applicant->save();
     //get the

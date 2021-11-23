@@ -20,6 +20,7 @@
                 <div v-show="showError" v-for="error in errors" :key="error.error" class="mb-4 font-lg text-sm text-red-600">
                     <span v-for="err in error" :key="err.id">{{err}}</span>
                 </div>
+
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <div v-show="job.has_first_name" class="mb-4">
@@ -37,6 +38,22 @@
                         <div v-show="job.has_phone" class="mb-4">
                             <jet-label for="phone" value="Phone Number" :required="job.phone_r"/>
                             <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" req autofocus />
+                        </div>
+                        <div v-show="job.has_age" class="mb-4">
+                            <jet-label for="age" value="Age" />
+                            <jet-input id="age" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.age"  autofocus />
+                        </div>
+                        <div v-show="job.has_dob" class="mb-4">
+                            <jet-label for="dob" value="Date of birth" />
+                            <jet-input id="dob" type="date" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.dob"  autofocus />
+                        </div>
+                        <div v-show="job.has_gender" class="mb-4">
+                            <jet-label for="gender" value="Gender" />
+                            <select v-model="form.gender" id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                            <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
                         </div>
                         <div v-show="job.has_cv" class="mb-4">
                             <jet-label for="cv" value="CV" />
@@ -84,11 +101,61 @@
                         </div>
                         <div v-show="job.has_city" class="mb-4">
                             <jet-label for="city" value="City" />
-                            <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.city"  autofocus />
+                            <jet-input id="city" type="text" class="mt-1 block w-full" v-model="form.city"  autofocus />
                         </div>
                         <div v-show="job.has_street" class="mb-4">
                             <jet-label for="street" value="Street" />
-                            <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.street"  autofocus />
+                            <jet-input id="street" type="text" class="mt-1 block w-full" v-model="form.street"  autofocus />
+                        </div>
+
+                        <div v-show="job.has_exp_post" class="mb-4">
+                            <jet-label for="exp_post" value="Years of Post Qualification Experience" />
+                            <jet-input id="exp_post" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.exp_post"  autofocus />
+                            <!-- <textarea id="exp_post" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.exp_post"></textarea> -->
+                        </div>
+                        <div v-show="job.has_experience" class="mb-4">
+                            <jet-label for="experience" value="Years of Experience" />
+                            <!-- <textarea id="experience" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.experience"></textarea> -->
+                            <jet-input id="experience" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.experience"  autofocus />
+
+                        </div>
+                        <div v-show="job.has_first_degree" class="mb-4">
+                            <jet-label for="first_degree" value="First Degree" />
+                            <select v-model="form.first_degree" id="first_degree" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="BSc">BSc</option>
+                                <option value="HND">HND</option>
+                                <option value="ND">ND</option>
+                            </select>
+                        </div>
+                        <div v-show="job.has_first_course" class="mb-4">
+                            <jet-label for="first_course" value="Course of Study" />
+                            <select v-model="form.first_course" id="first_course" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="BSc">BSc</option>
+                                <option value="HND">HND</option>
+                                <option value="ND">ND</option>
+                            </select>
+                        </div>
+                        <div v-show="job.has_first_grade" class="mb-4">
+                            <jet-label for="first_grade" value="Course of Study" />
+                            <select v-model="form.first_grade" id="first_grade" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="First Class ">First Class</option>
+                                <option value="Second Class (upper division)">Second Class (upper division)</option>
+                                <option value="Second Class (lower division)">Second Class (lower division)</option>
+                                <option value="Third Class">Third Class</option>
+                            </select>
+                        </div>
+                        <div v-show="job.has_professional" class="mb-4">
+                            <jet-label for="professional" value="Post Qualification Experience" />
+                            <select v-model="form.professional" id="professional" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="ACCA">ACCA</option>
+                                <option value="ICAN">ICAN</option>
+                                <option value="Both">Both</option>
+                                <option value="None">None</option>
+                            </select>
+                        </div>
+                        <div v-show="job.has_second_degree" class="mb-4">
+                            <jet-label for="second_degree" value="Other Degrees" />
+                            <jet-input id="second_degree" type="text" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
                         </div>
                     </div>
 
@@ -122,6 +189,9 @@
                                     </svg>
                                     </button>
                                 </div>
+                            </div>
+                            <div v-show="success" class="mb-4 font-lg text-sm bg-green-300 text-green-800 p-2">
+                                <span>Your Application has been received, we will get back to you shortly</span>
                             </div>
                             <div class="ml-7 my-7 text-sm grid grid-cols-1 md:grid-cols-3 gap-3 text-gray-500 font-light py-4">
                                 <div class="col-span-2">
@@ -159,7 +229,7 @@
                 </div>
             </div>
         </div>
-        <footer class="absolute bottom-0 items-center w-full flex justify-center">
+        <footer class="absolute bottom-0 items-center w-full flex justify-center mt-4">
             &copy; 2021 Nexia Abel Agbo &amp; Co.
         </footer>
     </div>
@@ -221,6 +291,7 @@
             term:'',
             showError: false,
             custom:0,
+            success:false,
             club:null,
             form: this.$inertia.form({
                     email : null,
@@ -237,6 +308,19 @@
                     state : null,
                     city : null,
                     street : null,
+                    age : null,
+                    dob : null,
+                    gender : null,
+                    exp_post : null,
+                    experience : null,
+                    first_degree : null,
+                    first_grade : null,
+                    first_course : null,
+                    second_degree : null,
+                    second_course : null,
+                    third_degree : null,
+                    third_course : null,
+                    professional : null,
                     job:this.job.id
                 })
             }
@@ -258,6 +342,7 @@
                         onSuccess: (response) => {
                             this.form.reset()
                             this.showingModal = false
+                            this.success = true;
                         }
                     })
             },

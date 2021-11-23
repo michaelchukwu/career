@@ -5,7 +5,9 @@ namespace App\Exports;
 use App\Models\Application;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
-class ApplicationsExport implements FromCollection
+use Maatwebsite\Excel\Concerns\WithHeadings;
+
+class ApplicationsExport implements FromCollection, WithHeadings
 {
     public function headings(): array
     {

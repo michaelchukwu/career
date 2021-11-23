@@ -29,7 +29,7 @@
                     </div>
                 </div>
         </header>
-        <div class="relative items-top py-6 lg:bg-transparent bg-gray-100 dark:bg-gray-900 ">
+        <div class="relative items-top py-6 lg:bg-transparent bg-gray-100 dark:bg-gray-900 mb-4">
             <div class="max-w-7xl mx-auto">
                 <div class="mx-auto px-6 grid xs:grid-cols-1 md:grid-cols-2 gap-2">
                     <div v-show="jobs.data.length == 0" class="text-2xl font-bold ml-7">
@@ -47,7 +47,7 @@
                                     <span class="text-gray-400 text-sm font-light">{{job.location}}</span>
                                 </div>
                             </div>
-                            <div class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,150)"></div>
+                            <div v-if="job.description" class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,150)"></div>
                             <div class="flex justify-between border-t border-gray-200 pt-4 max-h-11 h-12">
                                 <!-- <div v-show="job.salary!==null" class="ml-3 text-base font-semibold text-gray-500">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
                                 <div v-show="job.salary==null" class="ml-3 text-base font-semibold text-gray-500">Undisclosed </div> -->
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <footer class="absolute bottom-0 items-center w-full flex justify-center">
+        <footer class="absolute bottom-0 items-center w-full flex justify-center px-12">
             &copy; 2021 Nexia Abel Agbo &amp; Co.
         </footer>
     </div>
@@ -109,7 +109,7 @@ import Button from '../Jetstream/Button.vue'
             JetValidationErrors,
             Link,
             Modal,
-                Button,
+            Button,
         },
         props: {
             status: String,

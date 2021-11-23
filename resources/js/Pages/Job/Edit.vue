@@ -152,6 +152,60 @@
                                                 <jet-label for="street_r" value="Required" />
                                                 <jet-checkbox id="street_r" class="mt-1 block" v-model="form.street_r"  autofocus />
                                             </div>
+                                                                                        <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_age" value="Age" :required="true"/>
+                                                <jet-checkbox id="has_age" class="mt-1 block" v-model="form.has_age"  autofocus />
+                                                <jet-label for="age_r" value="Required" />
+                                                <jet-checkbox id="age_r" class="mt-1 block" v-model="form.age_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_dob" value="Date of Birth" :required="true"/>
+                                                <jet-checkbox id="has_dob" class="mt-1 block" v-model="form.has_dob"  autofocus />
+                                                <jet-label for="dob_r" value="Required" />
+                                                <jet-checkbox id="dob_r" class="mt-1 block" v-model="form.dob_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_gender" value="Gender" :required="true"/>
+                                                <jet-checkbox id="has_gender" class="mt-1 block" v-model="form.has_gender"  autofocus />
+                                                <jet-label for="gender_r" value="Required" />
+                                                <jet-checkbox id="gender_r" class="mt-1 block" v-model="form.gender_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_exp_post" value="Years of Experience (Post)" :required="true"/>
+                                                <jet-checkbox id="has_exp_post" class="mt-1 block" v-model="form.has_exp_post"  autofocus />
+                                                <jet-label for="exp_post_r" value="Required" />
+                                                <jet-checkbox id="exp_post_r" class="mt-1 block" v-model="form.exp_post_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_experience" value="Years of Experience" :required="true"/>
+                                                <jet-checkbox id="has_experience" class="mt-1 block" v-model="form.has_experience"  autofocus />
+                                                <jet-label for="experience_r" value="Required" />
+                                                <jet-checkbox id="experience_r" class="mt-1 block" v-model="form.experience_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_first_degree" value="First Degree" :required="true"/>
+                                                <jet-checkbox id="has_first_degree" class="mt-1 block" v-model="form.has_first_degree"  autofocus />
+                                                <jet-label for="first_degree_r" value="Required" />
+                                                <jet-checkbox id="first_degree_r" class="mt-1 block" v-model="form.first_degree_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_first_course" value="Course of Study" :required="true"/>
+                                                <jet-checkbox id="has_first_course" class="mt-1 block" v-model="form.has_first_course"  autofocus />
+                                                <jet-label for="first_course_r" value="Required" />
+                                                <jet-checkbox id="first_course_r" class="mt-1 block" v-model="form.first_course_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_first_grade" value="Grade" :required="true"/>
+                                                <jet-checkbox id="has_first_grade" class="mt-1 block" v-model="form.has_first_grade"  autofocus />
+                                                <jet-label for="grade_r" value="Required" />
+                                                <jet-checkbox id="grade_r" class="mt-1 block" v-model="form.grade_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_professional" value="Professional Qualification" :required="true"/>
+                                                <jet-checkbox id="has_professional" class="mt-1 block" v-model="form.has_professional"  autofocus />
+                                                <jet-label for="professional_r" value="Required" />
+                                                <jet-checkbox id="professional_r" class="mt-1 block" v-model="form.professional_r"  autofocus />
+                                            </div>
                                             <!-- <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="select_all" value="Select All" :required="false"/>
                                                 <jet-checkbox id="select_all" class="mt-1 block" v-model="selectAll"  autofocus />
@@ -235,29 +289,55 @@
                     has_phone:this.job.has_phone,
                     has_first_name:this.job.has_first_name,
                     has_last_name:this.job.has_last_name,
-                    has_linkedin:false,
-                    has_twitter:false,
-                    has_facebook:false,
-                    has_website:false,
-                    has_cv:false,
-                    has_cover_letter:false,
-                    has_image:false,
-                    has_state:false,
-                    has_city:false,
-                    has_street:false,
-                    phone_r:false,
-                    first_name_r:false,
-                    last_name_r:false,
-                    linkedin_r:false,
-                    twitter_r:false,
-                    facebook_r:false,
-                    website_r:false,
-                    cv_r:false,
-                    cover_letter_r:false,
-                    image_r:false,
-                    state_r:false,
-                    city_r:false,
-                    street_r:false
+                    has_linkedin:this.job.has_linkedin,
+                    has_twitter:this.job.has_twitter,
+                    has_facebook:this.job.has_facebook,
+                    has_website:this.job.has_website,
+                    has_cv:this.job.has_cv,
+                    has_cover_letter:this.job.has_cover_letter,
+                    has_image:this.job.has_image,
+                    has_state:this.job.has_state,
+                    has_city:this.job.has_city,
+                    has_street:this.job.has_street,
+                    phone_r:this.job.phone_r,
+                    first_name_r:this.job.first_name_r,
+                    last_name_r:this.job.last_name_r,
+                    linkedin_r:this.job.linkedin_r,
+                    twitter_r:this.job.twitter_r,
+                    facebook_r:this.job.facebook_r,
+                    website_r:this.job.website_r,
+                    cv_r:this.job.cv_r,
+                    cover_letter_r:this.job.cover_letter_r,
+                    image_r:this.job.image_r,
+                    state_r:this.job.state_r,
+                    city_r:this.job.city_r,
+                    street_r:this.job.street_r,
+                    has_age:this.job.has_age,
+                    has_dob:this.job.has_dob,
+                    has_gender:this.job.has_gender,
+                    has_first_course:this.job.has_first_course,
+                    has_exp_post:this.job.has_exp_post,
+                    has_experience:this.job.has_experience,
+                    has_first_degree:this.job.has_first_degree,
+                    has_first_grade:this.job.has_first_grade,
+                    has_second_degree:this.job.has_second_degree,
+                    has_second_course:this.job.has_second_course,
+                    has_third_degree:this.job.has_third_degree,
+                    has_third_course:this.job.has_third_course,
+                    has_professional:this.job.has_professional,
+                    age_r:this.job.age_r,
+                    dob_r:this.job.dob_r,
+                    gender_r:this.job.gender_r,
+                    first_course_r:this.job.first_course_r,
+                    exp_post_r:this.job.exp_post_r,
+                    experience_r:this.job.experience_r,
+                    first_degree_r:this.job.first_degree_r,
+                    first_grade_r:this.job.first_grade_r,
+                    second_degree_r:this.job.second_degree_r,
+                    second_course_r:this.job.second_course_r,
+                    third_degree_r:this.job.third_degree_r,
+                    third_course_r:this.job.third_course_r,
+                    professional_r:this.job.professional_r,
                 })
             }
         },

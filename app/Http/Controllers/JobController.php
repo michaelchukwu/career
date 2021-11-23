@@ -7,7 +7,6 @@ use App\Models\JobType;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class JobController extends Controller
 {
@@ -76,8 +75,9 @@ class JobController extends Controller
             'goes_live'=>$request->goes_live,
             'expires'=>$request->expires,
             'has_phone'=>$request->has_phone,
-            'has_first_name'=>$request->has_first_name,
-            'has_last_name'=>$request->has_last_name,
+            'has_first_name'=>true,
+            // 'has_first_name'=>$request->has_first_name,
+            'has_last_name'=>true,
             'has_linkedin'=>$request->has_linkedin,
             'has_twitter'=>$request->has_twitter,
             'has_facebook'=>$request->has_facebook,
@@ -101,6 +101,30 @@ class JobController extends Controller
             'state_r'=>$request->state_r,
             'city_r'=>$request->city_r,
             'street_r'=>$request->street_r,
+            'has_age'=>$request->has_age,
+            'has_dob'=>$request->has_dob,
+            'has_gender'=>$request->has_gender,
+            'has_first_course'=>$request->has_first_course,
+            'has_exp_post'=>$request->has_exp_post,
+            'has_experience'=>$request->has_experience,
+            'has_first_degree'=>$request->has_first_degree,
+            'has_second_degree'=>$request->has_second_degree,
+            'has_second_course'=>$request->has_second_course,
+            'has_third_degree'=>$request->has_third_degree,
+            'has_third_course'=>$request->has_third_course,
+            'has_professional'=>$request->has_professional,
+            'age_r'=>$request->age_r,
+            'dob_r'=>$request->dob_r,
+            'gender_r'=>$request->gender_r,
+            'first_course_r'=>$request->first_course_r,
+            'exp_post_r'=>$request->exp_post_r,
+            'experience_r'=>$request->experience_r,
+            'first_degree_r'=>$request->first_degree_r,
+            'second_degree_r'=>$request->second_degree_r,
+            'second_course_r'=>$request->second_course_r,
+            'third_degree_r'=>$request->third_degree_r,
+            'third_course_r'=>$request->third_course_r,
+            'professional_r'=>$request->professional_r,
             'created_at'=>now()
         ]);
 
@@ -189,6 +213,30 @@ class JobController extends Controller
         $job->state_r=$request->state_r;
         $job->city_r=$request->city_r;
         $job->street_r=$request->street_r;
+        $job->has_age=$request->has_age;
+        $job->has_dob=$request->has_dob;
+        $job->has_gender=$request->has_gender;
+        $job->has_first_course=$request->has_first_course;
+        $job->has_exp_post=$request->has_exp_post;
+        $job->has_experience=$request->has_experience;
+        $job->has_first_degree=$request->has_first_degree;
+        $job->has_second_degree=$request->has_second_degree;
+        $job->has_second_course=$request->has_second_course;
+        $job->has_third_degree=$request->has_third_degree;
+        $job->has_third_course=$request->has_third_course;
+        $job->has_professional=$request->has_professional;
+        $job->age_r=$request->age_r;
+        $job->dob_r=$request->dob_r;
+        $job->gender_r=$request->gender_r;
+        $job->first_course_r=$request->first_course_r;
+        $job->exp_post_r=$request->exp_post_r;
+        $job->experience_r=$request->experience_r;
+        $job->first_degree_r=$request->first_degree_r;
+        $job->second_degree_r=$request->second_degree_r;
+        $job->second_course_r=$request->second_course_r;
+        $job->third_degree_r=$request->third_degree_r;
+        $job->third_course_r=$request->third_course_r;
+        $job->professional_r=$request->professional_r;
         $job->updated_at=now();
         $job->save();
         return redirect()->route('jobs.index')

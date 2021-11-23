@@ -3,7 +3,7 @@
         <span v-if="value">{{ value }}</span>
         <span v-else><slot></slot></span>
         <span v-if="required" class="text-sm text-red-500 ml-1">*</span>
-        <span v-else class="text-sm text-gray-500 ml-2">(optional)</span>
+        <span v-else class="text-sm text-gray-500 ml-2"></span>
     </label>
 </template>
 
