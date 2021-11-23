@@ -5,7 +5,9 @@
             <div id="top" class="grid lg:grid-cols-2 gap-4 py-2 bg-transparent w-full mb-10 items-center ">
                 <div class="block lg:flex max-w-7xl mx-auto pt-12">
                     <div class="mx-auto lg:mx-6 px-6 lg:px-0 flex gap-3 items-center">
-                        <img src="https://nexianigeria.com/wp-content/uploads/2019/11/nexia-logo-retina-scaled.png" alt="" class="h-16 w-72">
+                        <Link href="/">
+                            <img src="https://nexianigeria.com/wp-content/uploads/2019/11/nexia-logo-retina-scaled.png" alt="" class="h-16 w-72">
+                        </Link>
                     </div>
                     <!-- <div id="top-search" class=" hidden relative w-full text-gray-600 px-6 lg:px-0">
                             <input v-model="term" @keyup="search" class="border-2 border-gray-300 bg-white h-10 mt-2 w-full px-5 pr-16 rounded-lg text-sm focus:outline-none"
@@ -47,7 +49,7 @@
                                     <span class="text-gray-400 text-sm font-light">{{job.location}}</span>
                                 </div>
                             </div>
-                            <div v-if="job.description" class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,150)"></div>
+                            <div v-if="job.description" class="ml-3 text-sm text-gray-500 font-light py-4 mb-2" v-html="job.description.substring(0,300)"></div>
                             <div class="flex justify-between border-t border-gray-200 pt-4 max-h-11 h-12">
                                 <!-- <div v-show="job.salary!==null" class="ml-3 text-base font-semibold text-gray-500">&#8358;{{job.salary}}/{{job.salary_duration}}</div>
                                 <div v-show="job.salary==null" class="ml-3 text-base font-semibold text-gray-500">Undisclosed </div> -->

@@ -5,7 +5,9 @@
             <div id="top" class="grid lg:grid-cols-2 gap-4 py-2 bg-transparent w-full mb-10 items-center ">
                 <div class="block lg:flex max-w-7xl mx-auto pt-12">
                     <div class="mx-auto lg:mx-6 px-6 lg:px-0 flex gap-3 items-center">
-                        <img src="https://nexianigeria.com/wp-content/uploads/2019/11/nexia-logo-retina-scaled.png" alt="" class="h-16 w-72">
+                        <Link href="/">
+                            <img src="https://nexianigeria.com/wp-content/uploads/2019/11/nexia-logo-retina-scaled.png" alt="" class="h-16 w-72">
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -24,11 +26,11 @@
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <div v-show="job.has_first_name" class="mb-4">
-                            <jet-label for="first_name" value="First Name" />
+                            <jet-label for="first_name" value="First Name" :required="first_name_r"/>
                             <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name"  autofocus />
                         </div>
                         <div v-show="job.has_last_name" class="mb-4">
-                            <jet-label for="last_name" value="Last Name" />
+                            <jet-label for="last_name" value="Last Name" :required="first_name_r"/>
                             <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name"  autofocus />
                         </div>
                         <div class="mb-4">
@@ -40,11 +42,11 @@
                             <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" req autofocus />
                         </div>
                         <div v-show="job.has_age" class="mb-4">
-                            <jet-label for="age" value="Age" />
+                            <jet-label for="age" value="Age" :required="age_r"/>
                             <jet-input id="age" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.age"  autofocus />
                         </div>
                         <div v-show="job.has_dob" class="mb-4">
-                            <jet-label for="dob" value="Date of birth" />
+                            <jet-label for="dob" value="Date of birth" :required="dob_r" />
                             <jet-input id="dob" type="date" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.dob"  autofocus />
                         </div>
                         <div v-show="job.has_gender" class="mb-4">
@@ -57,7 +59,7 @@
                         </div>
                         <div v-show="job.has_cv" class="mb-4">
                             <jet-label for="cv" value="CV" />
-                            <jet-input id="cv" type="file" class="mt-1 block w-full" @input="form.cv = $event.target.files[0]"  autofocus />
+                            <jet-input id="cv" type="file" class="mt-1 block w-full" @input="form.cv = $event.target.files[0]"  autofocus accept=".doc,.docx,.pdf" />
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                     {{ form.progress.percentage }}%
                                 </progress>
@@ -65,7 +67,7 @@
                         </div>
                         <div v-show="job.has_cover_letter" class="mb-4">
                             <jet-label for="cover_letter" value="Cover Letter" />
-                            <jet-input id="cover_letter" type="file" class="mt-1 block w-full" @input="form.cover_letter = $event.target.files[0]"  autofocus />
+                            <jet-input id="cover_letter" type="file" class="mt-1 block w-full" @input="form.cover_letter = $event.target.files[0]" autofocus accept=".doc,.docx,.pdf" />
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                     {{ form.progress.percentage }}%
                                 </progress>
@@ -124,19 +126,16 @@
                             <select v-model="form.first_degree" id="first_degree" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="BSc">BSc</option>
                                 <option value="HND">HND</option>
-                                <option value="ND">ND</option>
+                                <option value="ND">OND</option>
                             </select>
                         </div>
                         <div v-show="job.has_first_course" class="mb-4">
                             <jet-label for="first_course" value="Course of Study" />
-                            <select v-model="form.first_course" id="first_course" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                <option value="BSc">BSc</option>
-                                <option value="HND">HND</option>
-                                <option value="ND">ND</option>
-                            </select>
+                            <jet-input id="first_course" type="text" class="mt-1 block w-full" v-model="form.first_course"  autofocus />
+
                         </div>
                         <div v-show="job.has_first_grade" class="mb-4">
-                            <jet-label for="first_grade" value="Course of Study" />
+                            <jet-label for="first_grade" value="Grade" />
                             <select v-model="form.first_grade" id="first_grade" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="First Class ">First Class</option>
                                 <option value="Second Class (upper division)">Second Class (upper division)</option>
@@ -144,8 +143,12 @@
                                 <option value="Third Class">Third Class</option>
                             </select>
                         </div>
+                        <div v-show="job.has_second_degree" class="mb-4">
+                            <jet-label for="second_degree" value="Other Degrees" />
+                            <jet-input id="second_degree" type="text" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
+                        </div>
                         <div v-show="job.has_professional" class="mb-4">
-                            <jet-label for="professional" value="Post Qualification Experience" />
+                            <jet-label for="professional" value="Professional Qualifications" />
                             <select v-model="form.professional" id="professional" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="ACCA">ACCA</option>
                                 <option value="ICAN">ICAN</option>
@@ -153,10 +156,7 @@
                                 <option value="None">None</option>
                             </select>
                         </div>
-                        <div v-show="job.has_second_degree" class="mb-4">
-                            <jet-label for="second_degree" value="Other Degrees" />
-                            <jet-input id="second_degree" type="text" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
-                        </div>
+
                     </div>
 
                     <div class="flex items-center justify-end mt-4">
