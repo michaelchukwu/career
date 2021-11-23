@@ -89,7 +89,7 @@
                                                 <jet-label for="has_phone" value="Phone" :required="true"/>
                                                 <jet-checkbox id="phone" class="mt-1 block" v-model="form.has_phone"  autofocus />
                                                 <jet-label for="phone_r" value="Required" />
-                                                <jet-checkbox id="phone_r" class="mt-1 block" v-model="form.has_phone"  autofocus />
+                                                <jet-checkbox id="phone_r" class="mt-1 block" v-model="form.phone_r"  autofocus />
                                             </div>
                                             <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="has_first_name" value="First Name" :required="true"/>
