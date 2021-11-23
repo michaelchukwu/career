@@ -196,8 +196,8 @@
                                             <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="has_first_grade" value="Grade" :required="true"/>
                                                 <jet-checkbox id="has_first_grade" class="mt-1 block" v-model="form.has_first_grade"  autofocus />
-                                                <jet-label for="grade_r" value="Required" />
-                                                <jet-checkbox id="grade_r" class="mt-1 block" v-model="form.grade_r"  autofocus />
+                                                <jet-label for="first_grade_r" value="Required" />
+                                                <jet-checkbox id="first_grade_r" class="mt-1 block" v-model="form.first_grade_r"  autofocus />
                                             </div>
                                             <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="has_second_degree" value="Other Degrees" :required="true"/>
