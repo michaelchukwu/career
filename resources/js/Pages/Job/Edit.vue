@@ -201,6 +201,12 @@
                                                 <jet-checkbox id="grade_r" class="mt-1 block" v-model="form.grade_r"  autofocus />
                                             </div>
                                             <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_second_degree" value="Other Degrees" :required="true"/>
+                                                <jet-checkbox id="has_second_degree" class="mt-1 block" v-model="form.has_second_degree"  autofocus />
+                                                <jet-label for="second_degree_r" value="Required" />
+                                                <jet-checkbox id="second_degree_r" class="mt-1 block" v-model="form.second_degree_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="has_professional" value="Professional Qualification" :required="true"/>
                                                 <jet-checkbox id="has_professional" class="mt-1 block" v-model="form.has_professional"  autofocus />
                                                 <jet-label for="professional_r" value="Required" />

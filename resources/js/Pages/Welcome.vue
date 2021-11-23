@@ -5,7 +5,7 @@
             <div id="top" class="grid lg:grid-cols-2 gap-4 py-2 bg-transparent w-full mb-10 items-center ">
                 <div class="block lg:flex max-w-7xl mx-auto pt-12">
                     <div class="mx-auto lg:mx-6 px-6 lg:px-0 flex gap-3 items-center">
-                        <Link href="/">
+                        <Link href="https://nexianigeria.com">
                             <img src="https://nexianigeria.com/wp-content/uploads/2019/11/nexia-logo-retina-scaled.png" alt="" class="h-16 w-72">
                         </Link>
                     </div>

@@ -25,13 +25,13 @@
 
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <div v-show="job.has_first_name" class="mb-4">
-                            <jet-label for="first_name" value="First Name" :required="first_name_r"/>
-                            <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name"  autofocus />
+                        <div v-if="job.has_first_name" class="mb-4">
+                            <jet-label for="first_name" value="First Name" :required="job.first_name_r"/>
+                            <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" :required="job.first_name_r" autofocus />
                         </div>
                         <div v-show="job.has_last_name" class="mb-4">
-                            <jet-label for="last_name" value="Last Name" :required="first_name_r"/>
-                            <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name"  autofocus />
+                            <jet-label for="last_name" value="Last Name" :required="job.last_name_r"/>
+                            <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" :required="job.last_name_r" autofocus />
                         </div>
                         <div class="mb-4">
                             <jet-label for="Email" value="Email Address" :required="true"/>
@@ -39,104 +39,104 @@
                         </div>
                         <div v-show="job.has_phone" class="mb-4">
                             <jet-label for="phone" value="Phone Number" :required="job.phone_r"/>
-                            <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" req autofocus />
+                            <jet-input id="phone" type="tel" class="mt-1 block w-full" v-model="form.phone" :required="job.phone_r" autofocus />
                         </div>
                         <div v-show="job.has_age" class="mb-4">
-                            <jet-label for="age" value="Age" :required="age_r"/>
-                            <jet-input id="age" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.age"  autofocus />
+                            <jet-label for="age" value="Age" :required="job.age_r"/>
+                            <jet-input id="age" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.age" :required="job.age_r" autofocus />
                         </div>
                         <div v-show="job.has_dob" class="mb-4">
-                            <jet-label for="dob" value="Date of birth" :required="dob_r" />
-                            <jet-input id="dob" type="date" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.dob"  autofocus />
+                            <jet-label for="dob" value="Date of birth" :required="job.dob_r" />
+                            <jet-input id="dob" type="date" :required="job.dob_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.dob" autofocus />
                         </div>
                         <div v-show="job.has_gender" class="mb-4">
-                            <jet-label for="gender" value="Gender" />
-                            <select v-model="form.gender" id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <jet-label for="gender" value="Gender" :required="job.gender_r"/>
+                            <select v-model="form.gender" id="gender" :required="job.gender_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="Female">Female</option>
                                 <option value="Male">Male</option>
                             </select>
                             <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
                         </div>
                         <div v-show="job.has_cv" class="mb-4">
-                            <jet-label for="cv" value="CV" />
-                            <jet-input id="cv" type="file" class="mt-1 block w-full" @input="form.cv = $event.target.files[0]"  autofocus accept=".doc,.docx,.pdf" />
+                            <jet-label for="cv" value="CV" :required="job.cv_r" />
+                            <jet-input id="cv" type="file" :required="job.cv_r" class="mt-1 block w-full" @input="form.cv = $event.target.files[0]"  autofocus accept=".doc,.docx,.pdf" />
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                     {{ form.progress.percentage }}%
                                 </progress>
                             <!-- <jet-input id="cv" type="file" class="mt-1 block w-full" v-model="form.cv"  autofocus /> -->
                         </div>
                         <div v-show="job.has_cover_letter" class="mb-4">
-                            <jet-label for="cover_letter" value="Cover Letter" />
-                            <jet-input id="cover_letter" type="file" class="mt-1 block w-full" @input="form.cover_letter = $event.target.files[0]" autofocus accept=".doc,.docx,.pdf" />
+                            <jet-label for="cover_letter" :required="job.cover_letter_r" value="Cover Letter" />
+                            <jet-input id="cover_letter" :required="job.cover_letter_r" type="file" class="mt-1 block w-full" @input="form.cover_letter = $event.target.files[0]" autofocus accept=".doc,.docx,.pdf" />
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                     {{ form.progress.percentage }}%
                                 </progress>
                             <!-- <jet-input id="cover_letter" type="file" class="mt-1 block w-full" v-model="form.cover_letter"  autofocus /> -->
                         </div>
                         <div v-show="job.has_linkedin" class="mb-4">
-                            <jet-label for="linkedin" value="Linkedin URL" />
-                            <jet-input id="linkedin" type="text" class="mt-1 block w-full" v-model="form.linkedin"  autofocus />
+                            <jet-label for="linkedin" value="Linkedin URL" :required="job.linkedin_r" />
+                            <jet-input id="linkedin" type="text" :required="job.linkedin_r" class="mt-1 block w-full" v-model="form.linkedin"  autofocus />
                         </div>
                         <div v-show="job.has_twitter" class="mb-4">
-                            <jet-label for="twitter" value="Twitter Handle" />
-                            <jet-input id="twitter" type="text" class="mt-1 block w-full" v-model="form.twiiter"  autofocus />
+                            <jet-label for="twitter" value="Twitter Handle" :required="job.twitter_r"/>
+                            <jet-input id="twitter" :required="job.twitter_r" type="text" class="mt-1 block w-full" v-model="form.twiiter"  autofocus />
                         </div>
                         <div v-show="job.has_facebook" class="mb-4">
-                            <jet-label for="facebook" value="Facebook URL" />
-                            <jet-input id="facebook" type="text" class="mt-1 block w-full" v-model="form.facebook"  autofocus />
+                            <jet-label for="facebook" value="Facebook URL" :required="job.twitter_r" />
+                            <jet-input id="facebook" type="text" :required="job.twitter_r" class="mt-1 block w-full" v-model="form.facebook"  autofocus />
                         </div>
                         <div v-show="job.has_website" class="mb-4">
-                            <jet-label for="website" value="Website" />
-                            <jet-input id="website" type="text" class="mt-1 block w-full" v-model="form.website"  autofocus />
+                            <jet-label for="website" value="Website" ::required="job.website_r" />
+                            <jet-input id="website" type="text" ::required="job.website_r" class="mt-1 block w-full" v-model="form.website"  autofocus />
                         </div>
                         <div v-show="job.has_image" class="mb-4">
-                            <jet-label for="image" value="Image" />
-                            <jet-input id="image" type="file" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" autofocus />
+                            <jet-label for="image" value="Image" :required="job.image_r" />
+                            <jet-input id="image" type="file" :required="job.image_r" class="mt-1 block w-full" @input="form.image = $event.target.files[0]" autofocus />
                                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                                     {{ form.progress.percentage }}%
                                 </progress>
                             <!-- <jet-input id="image" type="text" class="mt-1 block w-full" v-model="form.image"  autofocus /> -->
                         </div>
                         <div v-show="job.has_state" class="mb-4">
-                            <jet-label for="state" value="State" />
-                            <jet-input id="state" type="text" class="mt-1 block w-full" v-model="form.state"  autofocus />
+                            <jet-label for="state" value="State" :required="job.state_r" />
+                            <jet-input id="state" type="text" :required="job.state_r" class="mt-1 block w-full" v-model="form.state"  autofocus />
                         </div>
                         <div v-show="job.has_city" class="mb-4">
-                            <jet-label for="city" value="City" />
-                            <jet-input id="city" type="text" class="mt-1 block w-full" v-model="form.city"  autofocus />
+                            <jet-label for="city" value="City" :required="city_r" />
+                            <jet-input id="city" type="text" :required="city_r" class="mt-1 block w-full" v-model="form.city"  autofocus />
                         </div>
                         <div v-show="job.has_street" class="mb-4">
-                            <jet-label for="street" value="Street" />
-                            <jet-input id="street" type="text" class="mt-1 block w-full" v-model="form.street"  autofocus />
+                            <jet-label for="street" value="Street" :required="job.street_r" />
+                            <jet-input id="street" type="text" :required="job.street_r" class="mt-1 block w-full" v-model="form.street"  autofocus />
                         </div>
 
                         <div v-show="job.has_exp_post" class="mb-4">
-                            <jet-label for="exp_post" value="Years of Post Qualification Experience" />
-                            <jet-input id="exp_post" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.exp_post"  autofocus />
+                            <jet-label for="exp_post" value="Years of Post Qualification Experience" :required="job.exp_post_r" />
+                            <jet-input id="exp_post" type="number" :required="job.exp_post_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.exp_post"  autofocus />
                             <!-- <textarea id="exp_post" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.exp_post"></textarea> -->
                         </div>
                         <div v-show="job.has_experience" class="mb-4">
-                            <jet-label for="experience" value="Years of Experience" />
+                            <jet-label for="experience" value="Years of Experience" :required="experience_r" />
                             <!-- <textarea id="experience" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.experience"></textarea> -->
-                            <jet-input id="experience" type="number" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.experience"  autofocus />
+                            <jet-input id="experience" type="number" :required="experience_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.experience"  autofocus />
 
                         </div>
                         <div v-show="job.has_first_degree" class="mb-4">
-                            <jet-label for="first_degree" value="First Degree" />
-                            <select v-model="form.first_degree" id="first_degree" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <jet-label for="first_degree" value="First Degree" :required="job.first_degree_r" />
+                            <select v-model="form.first_degree" id="first_degree" :required="job.first_degree_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="BSc">BSc</option>
                                 <option value="HND">HND</option>
                                 <option value="ND">OND</option>
                             </select>
                         </div>
                         <div v-show="job.has_first_course" class="mb-4">
-                            <jet-label for="first_course" value="Course of Study" />
-                            <jet-input id="first_course" type="text" class="mt-1 block w-full" v-model="form.first_course"  autofocus />
+                            <jet-label for="first_course" value="Course of Study" :required="job.first_course_r" />
+                            <jet-input id="first_course" type="text" :required="job.first_course_r" class="mt-1 block w-full" v-model="form.first_course"  autofocus />
 
                         </div>
                         <div v-show="job.has_first_grade" class="mb-4">
-                            <jet-label for="first_grade" value="Grade" />
-                            <select v-model="form.first_grade" id="first_grade" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <jet-label for="first_grade" value="Grade" :required="job.first_grade_r" />
+                            <select v-model="form.first_grade" id="first_grade" :required="job.first_grade_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="First Class ">First Class</option>
                                 <option value="Second Class (upper division)">Second Class (upper division)</option>
                                 <option value="Second Class (lower division)">Second Class (lower division)</option>
@@ -144,12 +144,13 @@
                             </select>
                         </div>
                         <div v-show="job.has_second_degree" class="mb-4">
-                            <jet-label for="second_degree" value="Other Degrees" />
-                            <jet-input id="second_degree" type="text" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
+                            <jet-label for="second_degree" value="Other Degrees" :required="second_degree_r" />
+                            <jet-input id="second_degree" type="text" :required="second_degree_r" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
+                            <small class="text-xs text-gray-500 font-extralight">eg Master's, PhD</small>
                         </div>
                         <div v-show="job.has_professional" class="mb-4">
-                            <jet-label for="professional" value="Professional Qualifications" />
-                            <select v-model="form.professional" id="professional" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                            <jet-label for="professional" :required="job.professional_r" value="Professional Qualifications" />
+                            <select v-model="form.professional" :required="job.professional_r" id="professional" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
                                 <option value="ACCA">ACCA</option>
                                 <option value="ICAN">ICAN</option>
                                 <option value="Both">Both</option>
@@ -172,10 +173,10 @@
         <div class="relative items-top py-6 lg:bg-transparent bg-gray-100 dark:bg-gray-900 ">
             <div class="max-w-7xl mx-auto">
                 <div class="mx-auto px-6">
-
                     <div class="w-full px-2 py-2">
                         <div>
                             <div class="ml-3 pb-4 md:flex md:flex-row items-center md:justify-between md:border-b md:border-gray-200 ">
+{{job.title}}
 
                                 <div class="ml-4 flex flex-col">
                                     <span class="text-black text-4xl font-semibold">{{job.title}} - Nexia Nigeria</span>
