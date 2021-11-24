@@ -109,6 +109,36 @@
                             <jet-label for="street" value="Street" :required="job.street_r" />
                             <jet-input id="street" type="text" :required="job.street_r" class="mt-1 block w-full" v-model="form.street"  autofocus />
                         </div>
+                        <div v-show="job.has_marital" class="mb-4">
+                            <jet-label for="marital" value="Marital Status" :required="job.marital_r"/>
+                            <select v-model="form.marital" id="marital" :required="job.marital_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Seperated">Seperated</option>
+                            </select>
+                            <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
+                        </div>
+                        <div v-show="job.has_state_of_origin" class="mb-4">
+                            <jet-label for="state_of_origin" value="State of Origin" :required="job.state_of_origin_r"/>
+                            <select v-model="form.state_of_origin" id="state_of_origin" :required="job.state_of_origin_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Seperated">Seperated</option>
+                            </select>
+                            <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
+                        </div>
+                        <div v-show="job.has_job_city" class="mb-4">
+                            <jet-label for="job_city" value="Preferred City" :required="job.job_city_r"/>
+                            <select v-model="form.job_city" id="job_city" :required="job.job_city_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
+                                <option value="Seperated">Seperated</option>
+                            </select>
+                            <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
+                        </div>
 
                         <div v-show="job.has_exp_post" class="mb-4">
                             <jet-label for="exp_post" value="Years of Post Qualification Experience" :required="job.exp_post_r" />
@@ -322,6 +352,9 @@
                     third_degree : null,
                     third_course : null,
                     professional : null,
+                    marital:null,
+                    state_of_origin:null,
+                    job_city:null,
                     job:this.job.id
                 })
             }

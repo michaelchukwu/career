@@ -211,6 +211,24 @@
                                                 <jet-label for="professional_r" value="Required" />
                                                 <jet-checkbox id="professional_r" class="mt-1 block" v-model="form.professional_r"  autofocus />
                                             </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_marital" value="Marital Status" :required="true"/>
+                                                <jet-checkbox id="has_marital" class="mt-1 block" v-model="form.has_marital"  autofocus />
+                                                <jet-label for="marital_r" value="Required" />
+                                                <jet-checkbox id="marital_r" class="mt-1 block" v-model="form.marital_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_state_of_origin" value="State of Origin " :required="true"/>
+                                                <jet-checkbox id="has_state_of_origin" class="mt-1 block" v-model="form.has_state_of_origin"  autofocus />
+                                                <jet-label for="state_of_origin_r" value="Required" />
+                                                <jet-checkbox id="state_of_origin_r" class="mt-1 block" v-model="form.state_of_origin_r"  autofocus />
+                                            </div>
+                                            <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
+                                                <jet-label for="has_job_city" value="Job City" :required="true"/>
+                                                <jet-checkbox id="has_job_city" class="mt-1 block" v-model="form.has_job_city"  autofocus />
+                                                <jet-label for="job_city_r" value="Required" />
+                                                <jet-checkbox id="job_city_r" class="mt-1 block" v-model="form.job_city_r"  autofocus />
+                                            </div>
 
                                             <!-- <div class="mb-4 grid grid-cols-2 md:grid-cols-4">
                                                 <jet-label for="select_all" value="Select All" :required="false"/>
@@ -345,6 +363,12 @@
                     third_degree_r:false,
                     third_course_r:false,
                     professional_r:false,
+                    has_marital:false,
+                    has_state_of_origin:false,
+                    has_job_city:false,
+                    marital_r:false,
+                    state_of_origin_r:false,
+                    job_city_r:false,
                 })
             }
         },
