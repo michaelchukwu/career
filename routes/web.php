@@ -179,7 +179,7 @@ use Laravel\Fortify\Http\Controllers\VerifyEmailController;
 Route::get('/', function (HttpRequest $request) {
     $jobs = Job::when($request->term, function ($query, $term){
         $query->where('title', 'LIKE', '%'.$term.'%');
-    })->where('is_live', true)->all();
+    })->where('is_live', true)->get();
     if($request->wantsJson()){
         return $jobs;
     }
