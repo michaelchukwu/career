@@ -26,11 +26,11 @@
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <div v-if="job.has_first_name" class="mb-4">
-                            <jet-label for="first_name" value="First Name" :required="job.first_name_r"/>
+                            <jet-label for="first_name" value="First Name" :required="true"/>
                             <jet-input id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" :required="job.first_name_r" autofocus />
                         </div>
                         <div v-show="job.has_last_name" class="mb-4">
-                            <jet-label for="last_name" value="Last Name" :required="job.last_name_r"/>
+                            <jet-label for="last_name" value="Last Name" :required="true"/>
                             <jet-input id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" :required="job.last_name_r" autofocus />
                         </div>
                         <div class="mb-4">
@@ -174,8 +174,8 @@
                             </select>
                         </div>
                         <div v-show="job.has_second_degree" class="mb-4">
-                            <jet-label for="second_degree" value="Other Degrees" :required="second_degree_r" />
-                            <jet-input id="second_degree" type="text" :required="second_degree_r" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
+                            <jet-label for="second_degree" value="Other Degrees" :required="job.second_degree_r" />
+                            <jet-input id="second_degree" type="text" :required="job.second_degree_r" class="mt-1 block w-full" v-model="form.second_degree"  autofocus />
                             <small class="text-xs text-gray-500 font-extralight">eg Master's, PhD</small>
                         </div>
                         <div v-show="job.has_professional" class="mb-4">
@@ -206,7 +206,6 @@
                     <div class="w-full px-2 py-2">
                         <div>
                             <div class="ml-3 pb-4 md:flex md:flex-row items-center md:justify-between md:border-b md:border-gray-200 ">
-{{job.title}}
 
                                 <div class="ml-4 flex flex-col">
                                     <span class="text-black text-4xl font-semibold">{{job.title}} - Nexia Nigeria</span>

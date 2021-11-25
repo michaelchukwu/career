@@ -113,9 +113,11 @@ class JobController extends Controller
             'has_third_degree'=>$request->has_third_degree,
             'has_third_course'=>$request->has_third_course,
             'has_professional'=>$request->has_professional,
+            'has_first_grade'=>$request->has_first_grade,
             'age_r'=>$request->age_r,
             'dob_r'=>$request->dob_r,
             'gender_r'=>$request->gender_r,
+            'first_grade_r'=>$request->first_grade_r,
             'first_course_r'=>$request->first_course_r,
             'exp_post_r'=>$request->exp_post_r,
             'experience_r'=>$request->experience_r,
@@ -203,6 +205,8 @@ class JobController extends Controller
         $job->phone_r=$request->phone_r;
         $job->first_name_r=$request->first_name_r;
         $job->last_name_r=$request->last_name_r;
+        $job->has_first_grade=$request->has_first_grade;
+        $job->first_grade_r=$request->first_grade_r;
         $job->linkedin_r=$request->linkedin_r;
         $job->twitter_r=$request->twitter_r;
         $job->facebook_r=$request->facebook_r;
@@ -239,6 +243,7 @@ class JobController extends Controller
         $job->professional_r=$request->professional_r;
         $job->updated_at=now();
         $job->save();
+        // dd($job);
         return redirect()->route('jobs.index')
                         ->with('success','Job updated successfully');
     }
