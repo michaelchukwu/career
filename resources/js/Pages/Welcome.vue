@@ -31,6 +31,12 @@
                     </div>
                 </div>
         </header>
+        <div class="p-2 mb-4 text-lnk">
+            <div class="max-w-7xl mx-auto px-6">
+                Please apply for only one job role.<br> Application for more than one role will disqualify the applicant.
+            <br>Deadline: <strong>30 Nov. 2021</strong>
+            </div>
+        </div>
         <div class="relative items-top py-6 lg:bg-transparent bg-gray-100 dark:bg-gray-900 mb-4">
             <div class="max-w-7xl mx-auto">
                 <div class="mx-auto px-6 grid xs:grid-cols-1 md:grid-cols-2 gap-2">

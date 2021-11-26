@@ -23,6 +23,11 @@
                     <span v-for="err in error" :key="err.id">{{err}}</span>
                 </div>
 
+                <div class="p-2 mb-4 text-lnk">
+                    Please apply for only one job role.<br> Application for more than one role will disqualify the applicant.
+                    <br>Deadline: <strong>30 Nov. 2021</strong>
+                </div>
+
                 <form @submit.prevent="submit">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                         <div v-if="job.has_first_name" class="mb-4">
