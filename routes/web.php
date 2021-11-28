@@ -202,15 +202,15 @@ Route::post('/apply', function (HttpRequest $request) {
 
     if ($request->hasFile('image')) {
         $guessExtension = $request->file('image')->guessExtension();
-        $image_path = $request->file('image')->storeAs('image', $request->first_name.'_'.now().'_'.'image'.$guessExtension, 'public');
+        $image_path = $request->file('image')->storeAs('image', $request->first_name.'_'.md5(now()).'_'.'image.'.$guessExtension, 'public');
     }
     if ($request->hasFile('cv')) {
         $guessExtension = $request->file('cv')->guessExtension();
-        $cv_path = $request->file('cv')->storeAs('cv', $request->first_name.'_'.now().'_'.'cv'.$guessExtension, 'public');
+        $cv_path = $request->file('cv')->storeAs('cv', $request->first_name.'_'.md5(now()).'_'.'cv.'.$guessExtension, 'public');
     }
     if ($request->hasFile('cover_letter')) {
         $guessExtension = $request->file('cover_letter')->guessExtension();
-        $cover_letter_path = $request->file('cover_letter')->storeAs('cover_letter', $request->first_name.'_'.now().'_'.'cover_letter'.$guessExtension, 'public');
+        $cover_letter_path = $request->file('cover_letter')->storeAs('cover_letter', $request->first_name.'_'.md5(now()).'_'.'cover_letter.'.$guessExtension, 'public');
         // $cover_letter_path = $request->file('cover_letter')->store('cover_letter', 'public');
     }
     $request->image=$image_path;

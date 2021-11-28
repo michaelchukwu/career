@@ -25,7 +25,7 @@
 
                 <div class="p-2 mb-4 text-lnk">
                     Please apply for only one job role.<br> Application for more than one role will disqualify the applicant.
-                    <br>Deadline: <strong>30 Nov. 2021</strong>
+                    <br>Deadline: <strong>07 December, 2021</strong>
                 </div>
 
                 <form @submit.prevent="submit">
