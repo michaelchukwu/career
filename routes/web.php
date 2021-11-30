@@ -5,11 +5,13 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\BackupController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\JobTypeController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\WalletController;
 use App\Models\Job;
 use App\Models\Account;
 use App\Models\Applicant;
 use App\Models\Application as Apply;
+use App\Models\Notice;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Artisan;
@@ -180,11 +182,13 @@ Route::get('/', function (HttpRequest $request) {
     $jobs = Job::when($request->term, function ($query, $term){
         $query->where('title', 'LIKE', '%'.$term.'%');
     })->where('is_live', true)->paginate(100);
+    $notices = Notice::all();
     if($request->wantsJson()){
         return $jobs;
     }
     return Inertia::render('Welcome', [
-        'jobs' => $jobs
+        'jobs' => $jobs,
+        'notices' => $notices
     ]);
 })->name('home');
 Route::get('/position/{jobi}', function ($jobi) {
@@ -237,8 +241,9 @@ Route::post('/apply', function (HttpRequest $request) {
     $applicant->gender = $request->gender;
     $applicant->exp_post = $request->exp_post;
     $applicant->experience = $request->experience;
+    $applicant->experience = $request->experience;
     $applicant->first_degree = $request->first_degree;
-    $applicant->first_course = $request->first_course;
+    $applicant->first_grade = $request->first_grade;
     $applicant->second_degree = $request->second_degree;
     $applicant->second_course = $request->second_course;
     $applicant->third_degree = $request->third_degree;
@@ -282,4 +287,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('jobs/publish/{job}', [JobController::class, 'publish']);
     Route::get('jobs/unpublish/{job}', [JobController::class, 'unPublish']);
     Route::resource('job-types', JobTypeController::class);
+    Route::resource('notice', NoticeController::class);
 });

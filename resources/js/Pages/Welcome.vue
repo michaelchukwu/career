@@ -31,10 +31,9 @@
                     </div>
                 </div>
         </header>
-        <div class="p-2 mb-4 text-lnk">
-            <div class="max-w-7xl mx-auto px-6">
-                Please apply for only one job role.<br> Application for more than one role will disqualify the applicant.
-            <br>Deadline: <strong>07 December, 2021</strong>
+        <div class="py-7 px-4 mb-4 bg-white" v-for="notice in notices" :key="notice.id">
+            <div class="max-w-7xl mx-auto px-6" v-if="notice.position==4||notice.position==1" :class="notice.color">
+                <p v-html="notice.description"></p>
             </div>
         </div>
         <div class="relative items-top py-6 lg:bg-transparent bg-gray-100 dark:bg-gray-900 mb-4">
@@ -123,6 +122,7 @@ import Button from '../Jetstream/Button.vue'
             status: String,
             errors: Object,
             jobs: Object,
+            notices: Object,
             message: String
         },
         data(){

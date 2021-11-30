@@ -22,10 +22,10 @@
                 <div v-show="showError" v-for="error in errors" :key="error.error" class="mb-4 font-lg text-sm text-red-600">
                     <span v-for="err in error" :key="err.id">{{err}}</span>
                 </div>
-
-                <div class="p-2 mb-4 text-lnk">
-                    Please apply for only one job role.<br> Application for more than one role will disqualify the applicant.
-                    <br>Deadline: <strong>07 December, 2021</strong>
+                <div v-for="notice in notices" :key="notice.id">
+                    <div class="p-2 mb-4" v-if="notice.position==4||notice.position==3" :class="notice.color">
+                        <p v-html="notice.description"></p>
+                    </div>
                 </div>
 
                 <form @submit.prevent="submit">
@@ -104,7 +104,11 @@
                         </div>
                         <div v-if="job.has_state" class="mb-4">
                             <jet-label for="state" value="State" :required="job.state_r" />
-                            <jet-input id="state" type="text" :required="job.state_r" class="mt-1 block w-full" v-model="form.state"  autofocus />
+                            <select v-model="form.state" id="state" :required="job.state_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                                <option>Please select</option>
+                                <option v-for="state in states" :key="state.id" :value="state">{{state}}</option>
+
+                            </select>
                         </div>
                         <div v-if="job.has_city" class="mb-4">
                             <jet-label for="city" value="City" :required="city_r" />
@@ -127,20 +131,18 @@
                         <div v-if="job.has_state_of_origin" class="mb-4">
                             <jet-label for="state_of_origin" value="State of Origin" :required="job.state_of_origin_r"/>
                             <select v-model="form.state_of_origin" id="state_of_origin" :required="job.state_of_origin_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Seperated">Seperated</option>
+                                <option>Please select</option>
+                                <option v-for="state in states" :key="state.id" :value="state">{{state}}</option>
+
                             </select>
                             <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
                         </div>
                         <div v-if="job.has_job_city" class="mb-4">
                             <jet-label for="job_city" value="Preferred City" :required="job.job_city_r"/>
                             <select v-model="form.job_city" id="job_city" :required="job.job_city_r" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm">
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                                <option value="Seperated">Seperated</option>
+                                <option></option>
+                                <option v-for="city in job_location" :key="city.id" :value="city">{{city}}</option>
+
                             </select>
                             <!-- <textarea id="gender" class="mt-1 block w-full border-gray-300 focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 rounded-md shadow-sm" v-model="form.gender"></textarea> -->
                         </div>
@@ -328,6 +330,45 @@
             custom:0,
             success:false,
             club:null,
+            states:[
+                "Abia",
+                "Adamawa",
+                "Akwa Ibom",
+                "Anambra",
+                "Bauchi",
+                "Bayelsa",
+                "Benue",
+                "Borno",
+                "Cross River",
+                "Delta",
+                "Ebonyi",
+                "Edo",
+                "Ekiti",
+                "Enugu",
+                "FCT - Abuja",
+                "Gombe",
+                "Imo",
+                "Jigawa",
+                "Kaduna",
+                "Kano",
+                "Katsina",
+                "Kebbi",
+                "Kogi",
+                "Kwara",
+                "Lagos",
+                "Nasarawa",
+                "Niger",
+                "Ogun",
+                "Ondo",
+                "Osun",
+                "Oyo",
+                "Plateau",
+                "Rivers",
+                "Sokoto",
+                "Taraba",
+                "Yobe",
+                "Zamfara"
+                ],
             form: this.$inertia.form({
                     email : null,
                     phone : null,
@@ -415,6 +456,12 @@
                     document.getElementById('logo-text').classList.replace('hidden', 'block')
                 }
             })
+        },
+        computed:{
+            job_location(){
+                // return this.job.location
+                return this.job.location.split(",")
+            }
         }
         // mounted(){
         //     window.addEventListener('scroll', debounce((e)=>{
