@@ -191,6 +191,28 @@ Route::get('/', function (HttpRequest $request) {
         'notices' => $notices
     ]);
 })->name('home');
+Route::get('/c2rt', function (HttpRequest $request){
+
+    $applicants = Applicant::where('first_grade',null)->get(['email', 'first_name']);
+    // $applicants = Applicant::where('first_grade',null)->only('email', 'first_name')->get('email');
+
+    if($request->grade){
+        $app = Applicant::where('email',$request->email)->where('first_grade',null)->first();
+        $app->first_grade = $request->grade;
+        $app->save();
+        $applicants = Applicant::where('first_grade',null)->get(['email', 'first_name']);
+
+
+    }
+
+    if($request->wantsJson()){
+        return $applicants;
+    }
+
+    return Inertia::render('Correction',[
+        'applicants' => $applicants,
+    ]);
+})->name('c2rt');
 Route::get('/position/{jobi}', function ($jobi) {
     $job = Job::find($jobi);
     $job->type = DB::table('job_types')->where('id', $job->job_type_id)->first();
